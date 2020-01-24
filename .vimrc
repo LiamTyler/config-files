@@ -72,3 +72,6 @@ autocmd BufReadPost *
 " Remap tab next/previous
 nnoremap <C-H> :tabprevious<CR>
 nnoremap <C-L> :tabnext<CR>
+
+nnoremap <C-N> :resize +10<CR>
+nnoremap <C-M> :resize -10<CR>

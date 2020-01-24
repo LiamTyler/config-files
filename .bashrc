@@ -16,6 +16,8 @@ fi
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
+source ~/vulkan/setup-env.sh
+
 export PATH=/usr/local/cuda-10.0/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64:$LD_LIBRARY_PATH
 
@@ -30,7 +32,7 @@ fi
 PS1='🚀@\W\$ '
 #PS1='🚀 @\W\[(sgr0)\]$ '
 
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules,build*}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 bind -x '"\C-O": vim $(fzf);'
 
