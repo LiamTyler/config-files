@@ -10,7 +10,7 @@ sudo apt -y install cmake
 sudo apt -y install gimp
 sudo apt -y install git
 git config --global user.email "Tyler.Liam7@gmail.com"
-git config --global user.name "Liam Tyler"
+git config --global user.name "LiamTyler"
 
 # GCC 10
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
