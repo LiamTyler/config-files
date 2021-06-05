@@ -1,21 +1,24 @@
 # Dont require password for sudo
+# note, dont run this script with sudo, otherwise $USER will be 'root'
 echo "$USER ALL=(ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo
 
 cwd=$(pwd)
 
 sudo apt -y install build-essential
 sudo apt -y install curl
-sudo apt -y install git
 sudo apt -y install cmake
 sudo apt -y install gimp
+sudo apt -y install git
+git config --global user.email "Tyler.Liam7@gmail.com"
+git config --global user.name "Liam Tyler"
 
-# GCC 9
+# GCC 10
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 sudo apt-get -q update
-sudo apt-get -y install gcc-9
-sudo apt-get -y install g++-9
-sudo ln -s /usr/bin/gcc-9 /usr/local/bin/gcc
-sudo ln -s /usr/bin/g++-9 /usr/local/bin/g++
+sudo apt-get -y install gcc-10
+sudo apt-get -y install g++-10
+sudo ln -s /usr/bin/gcc-10 /usr/local/bin/gcc
+sudo ln -s /usr/bin/g++-10 /usr/local/bin/g++
 # TODO: update-alternatives or relink cc/c++?
 
 # Python
@@ -46,16 +49,15 @@ sudo apt -y install xorg-dev
 
 # vulkan install
 cd ~
-VULKAN_VERSION="1.2.131.1"
-curl -LO https://vulkan.lunarg.com/sdk/download/${VULKAN_VERSION}/linux/vulkansdk-linux-x86_64-${VULKAN_VERSION}.tar.gz
-tar zxf vulkansdk-linux-x86_64-${VULKAN_VERSION}.tar.gz
-mv ${VULKAN_VERSION} vulkan
-rm vulkansdk-linux-x86_64-${VULKAN_VERSION}.tar.gz
+sudo apt install vulkan-sdk
 
 # Latest Vim
 sudo add-apt-repository -y ppa:jonathonf/vim
 sudo apt update
 sudo apt -y install vim
+
+# make vim be default editor
+sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 100
 
 # Install ripgrep 11.0.2
 curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
@@ -79,6 +81,9 @@ chmod +x install.sh
 
 # Turn off the "system program problem detected" thing
 printf "# set this to 0 to disable apport, or to 1 to enable it\n# you can temporarily override this with\n# sudo service apport start force_start=1\nenabled=0" | sudo tee /etc/default/apport
+
+# Allow for the chrome gnome extension to work
+sudo apt-get install chrome-gnome-shell
 
 # OTHER TODOS:
 # gnome-extensions
